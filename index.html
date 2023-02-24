@@ -1,21 +1,17 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Login with Discord</title>
-  </head>
-  <body>
-    <button onclick="login()">Login with Discord</button>
-
-    <script>
-      function login() {
-        const clientId = "1078436786302357625";
-        const redirectUri = "https://merogames.github.io/";
-        const scopes = 'identify';
-        const authorizeUrl = `https://discord.com/api/oauth2/authorize?client_id=${1078436786302357625}&redirect_uri=${encodeURIComponent(https%3A%2F%2Fmerogames.github.io%2Fcallback.html)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
-        window.location.href = authorizeUrl;
-      }
-    </script>
-  </body>
+<head>
+	<title>Discord Login Example</title>
+	<script type="text/javascript">
+		const YOUR_CLIENT_ID = '1078436786302357625';
+		const authUrl = `https://discord.com/api/oauth2/authorize?client_id=1078436786302357625&redirect_uri=https%3A%2F%2Fmerogames.github.io%2Fcallback.html&response_type=code&scope=identify`;
+		
+		function login() {
+			window.location.href = authUrl;
+		}
+	</script>
+</head>
+<body>
+	<button onclick="login()">Login with Discord</button>
+</body>
 </html>
