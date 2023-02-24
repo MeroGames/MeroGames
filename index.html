@@ -11,6 +11,10 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      #logout-btn {
+  display: none;
+}
+
     }
 
     .container {
@@ -59,6 +63,8 @@
   </div>
   <script>
     function login() {
+  document.getElementById("logout-btn").style.display = "block";
+  document.getElementById("login-btn").style.display = "none";
       window.location.href = 'login';
     }
 
@@ -66,6 +72,7 @@
       localStorage.clear();
       document.getElementById('login-btn').style.display = 'block';
       document.getElementById('profile-btn').style.display = 'none';
+      
     }
 
     const accessToken = localStorage.getItem('accessToken');
