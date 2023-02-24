@@ -6,6 +6,7 @@
 		body {
 			background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
 			background-size: cover;
+			background-repeat: no-repeat;
 			background-position: center center;
 		}
 
@@ -47,11 +48,11 @@
 	</style>
 	<script type="text/javascript">
 		function login() {
-			var CLIENT_ID = "YOUR_CLIENT_ID_HERE";
-			var REDIRECT_URI = "YOUR_REDIRECT_URI_HERE";
+			var CLIENT_ID = "1078436786302357625";
+			var REDIRECT_URI = "https://merogames.github.io/";
 			var SCOPE = "identify email";
 
-			window.location.href = "https://discordapp.com/oauth2/authorize?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=" + SCOPE;
+			window.location.href = `https://discord.com/api/oauth2/authorize?client_id=1078436786302357625&redirect_uri=https%3A%2F%2Fmerogames.github.io%2index.html&response_type=code&scope=identify`;
 		}
 
 		function logout() {
