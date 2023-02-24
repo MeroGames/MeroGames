@@ -1,17 +1,14 @@
-<!-- profile.html -->
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>My Profile</title>
+    <title>Discord Login Callback</title>
   </head>
   <body>
+    <h1>Discord Login Callback</h1>
     <img id="avatar" src="" alt="Avatar">
-    <h1 id="username"></h1>
-
+    <span id="name"></span>
     <script>
-      // Get the authorization code from the URL query parameters
-      const code = new URLSearchParams(window.location.search).get('code');
+       const code = new URLSearchParams(window.location.search).get('code');
 
       // Exchange the authorization code for an access token
       fetch('https://discord.com/api/oauth2/token', {
@@ -46,3 +43,4 @@
     </script>
   </body>
 </html>
+
