@@ -6,106 +6,93 @@
 		body {
 			background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
 			background-size: cover;
+			background-position: center center;
 		}
 
-		.button {
-			display: inline-block;
-			border-radius: 4px;
-			background-color: #f4511e;
-			border: none;
-			color: #FFFFFF;
+		h1 {
+			font-size: 48px;
 			text-align: center;
-			font-size: 28px;
-			padding: 20px;
-			width: 200px;
-			transition: all 0.5s;
+			margin-top: 200px;
+			color: white;
+			text-shadow: 2px 2px black;
+		}
+
+		button {
+			font-size: 24px;
+			padding: 10px;
+			margin: 10px;
+			background-color: white;
+			border: none;
+			border-radius: 10px;
 			cursor: pointer;
-			margin: 5px;
 		}
 
-		.button span {
-			cursor: pointer;
-			display: inline-block;
-			position: relative;
-			transition: 0.5s;
+		#login-btn {
+			margin-top: 100px;
+			margin-left: 50%;
+			transform: translateX(-50%);
 		}
 
-		.button span:after {
-			content: '\00bb';
-			position: absolute;
-			opacity: 0;
-			top: 0;
-			right: -20px;
-			transition: 0.5s;
+		#profile-btn {
+			margin-top: 10px;
+			margin-left: 50%;
+			transform: translateX(-50%);
 		}
 
-		.button:hover span {
-			padding-right: 25px;
-		}
-
-		.button:hover span:after {
-			opacity: 1;
-			right: 0;
-		}
-
-		.logout {
-			background-color: #4CAF50;
-		}
-
-		.logout:hover {
-			background-color: #3e8e41;
-		}
-
-		.profile {
-			background-color: #008CBA;
-		}
-
-		.profile:hover {
-			background-color: #007AA3;
+		#logout-btn {
+			margin-top: 10px;
+			margin-left: 50%;
+			transform: translateX(-50%);
 		}
 	</style>
+	<script type="text/javascript">
+		function login() {
+			var CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+			var REDIRECT_URI = "YOUR_REDIRECT_URI_HERE";
+			var SCOPE = "identify email";
+
+			window.location.href = "https://discordapp.com/oauth2/authorize?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=" + SCOPE;
+		}
+
+		function logout() {
+			localStorage.removeItem("access_token");
+			location.reload();
+		}
+
+		function getProfile() {
+			var access_token = localStorage.getItem("access_token");
+			if (access_token) {
+				fetch("https://discordapp.com/api/users/@me", {
+					headers: {
+						"Authorization": "Bearer " + access_token
+					}
+				})
+				.then(response => response.json())
+				.then(data => {
+					document.getElementById("profile-btn").innerHTML = data.username;
+					document.getElementById("profile-btn").style.display = "inline-block";
+					document.getElementById("profile-btn").onclick = function() {
+						window.location.href = "profile.html";
+					}
+					document.getElementById("logout-btn").style.display = "inline-block";
+				})
+				.catch(error => {
+					console.log(error);
+				});
+			}
+		}
+
+		window.onload = function() {
+			getProfile();
+		}
+	</script>
 </head>
 <body>
-	<center>
-		<br><br><br><br>
-		<button class="button" onclick="window.location.href='login'"><span>Login with Discord</span></button>
-		<button class="button" onclick="window.location.href='tasks.html'"><span>Tasks</span></button>
-
-		<div id="user-info"></div>
-
-		<script type="text/javascript">
-			function onLoggedIn() {
-				document.getElementById('login-btn').style.display = 'none';
-				document.getElementById('logout-btn').style.display = 'inline-block';
-				document.getElementById('profile-btn').style.display = 'inline-block';
-			}
-
-			function onLoggedOut() {
-				document.getElementById('login-btn').style.display = 'inline-block';
-				document.getElementById('logout-btn').style.display = 'none';
-				document.getElementById('profile-btn').style.display = 'none';
-				document.getElementById('user-info').innerHTML = '';
-			}
-
-			function onUserInfo(userInfo) {
-				var userInfoDiv = document.getElementById('user-info');
-				userInfoDiv.innerHTML = '<img src="' + userInfo.avatar + '" width="32" height="32" style="vertical-align: middle;"> ' + userInfo.username;
-			}
-		</script>
-
-		<button class="button logout" id="logout-btn" onclick="logout()"><span>Logout</span></button>
-		<button class="button profile" id="profile-btn" onclick="window.location.href='profile.html'"><span>Profile</span></button>
-
-		<script type="text/javascript">
-			var xhttp = new XMLHttpRequest();
-
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var response = JSON.parse(this.responseText);
-
-					if (response.loggedIn) {
-						onLoggedIn();
-						onUserInfo(response.userInfo);
-					} else {
-						onLoggedOut();
+	<h1>EPC-Lab</h1>
+	<button onclick="login()" id="login-btn">Login with Discord</button>
+	<button onclick="location.href='tasks.html'" id="tasks-btn">Tasks</button>
+	<button onclick="logout()" id="logout-btn" style="display: none;">Logout</button>
+	<button id="profile-btn" style="display: none;"></button>
+</body>
+</html>
 
