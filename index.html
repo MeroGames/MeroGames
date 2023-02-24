@@ -1,86 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <title>EPC-Lab</title>
-  <style>
-    body {
-      background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      #logout-btn {
-  display: none;
-}
+	<title>EPC-Lab</title>
+	<style type="text/css">
+		body {
+			background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
+			background-size: cover;
+		}
 
-    }
+		.button {
+			display: inline-block;
+			border-radius: 4px;
+			background-color: #f4511e;
+			border: none;
+			color: #FFFFFF;
+			text-align: center;
+			font-size: 28px;
+			padding: 20px;
+			width: 200px;
+			transition: all 0.5s;
+			cursor: pointer;
+			margin: 5px;
+		}
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+		.button span {
+			cursor: pointer;
+			display: inline-block;
+			position: relative;
+			transition: 0.5s;
+		}
 
-    h1 {
-      color: white;
-      font-size: 4rem;
-      margin: 0;
-      text-align: center;
-      text-shadow: 2px 2px 4px #000000;
-    }
+		.button span:after {
+			content: '\00bb';
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			right: -20px;
+			transition: 0.5s;
+		}
 
-    .btn {
-      margin: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 1.5rem;
-      text-shadow: 1px 1px 2px #000000;
-      cursor: pointer;
-    }
+		.button:hover span {
+			padding-right: 25px;
+		}
 
-    .btn-profile {
-      background-color: #7289DA;
-    }
+		.button:hover span:after {
+			opacity: 1;
+			right: 0;
+		}
 
-    .btn-logout {
-      background-color: #F04747;
-    }
-  </style>
+		.logout {
+			background-color: #4CAF50;
+		}
+
+		.logout:hover {
+			background-color: #3e8e41;
+		}
+
+		.profile {
+			background-color: #008CBA;
+		}
+
+		.profile:hover {
+			background-color: #007AA3;
+		}
+	</style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>EPC-Lab</h1>
-    <a href="" id="login-btn" class="btn btn-logout" onclick="logout()">Logout</a>
-    <a href="profile.html" id="profile-btn" class="btn btn-profile" style="display: none;"></a>
-    <a href="tasks.html" class="btn">Tasks</a>
-  </div>
-  <script>
-    function login() {
-  document.getElementById("logout-btn").style.display = "block";
-  document.getElementById("login-btn").style.display = "none";
-      window.location.href = 'login';
-    }
+	<center>
+		<br><br><br><br>
+		<button class="button" onclick="window.location.href='login'"><span>Login with Discord</span></button>
+		<button class="button" onclick="window.location.href='tasks.html'"><span>Tasks</span></button>
 
-    function logout() {
-      localStorage.clear();
-      document.getElementById('login-btn').style.display = 'block';
-      document.getElementById('profile-btn').style.display = 'none';
-      
-    }
+		<div id="user-info"></div>
 
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      document.getElementById('login-btn').style.display = 'none';
-      document.getElementById('profile-btn').style.display = 'block';
-    }
-  </script>
-</body>
+		<script type="text/javascript">
+			function onLoggedIn() {
+				document.getElementById('login-btn').style.display = 'none';
+				document.getElementById('logout-btn').style.display = 'inline-block';
+				document.getElementById('profile-btn').style.display = 'inline-block';
+			}
 
-</html>
+			function onLoggedOut() {
+				document.getElementById('login-btn').style.display = 'inline-block';
+				document.getElementById('logout-btn').style.display = 'none';
+				document.getElementById('profile-btn').style.display = 'none';
+				document.getElementById('user-info').innerHTML = '';
+			}
+
+			function onUserInfo(userInfo) {
+				var userInfoDiv = document.getElementById('user-info');
+				userInfoDiv.innerHTML = '<img src="' + userInfo.avatar + '" width="32" height="32" style="vertical-align: middle;"> ' + userInfo.username;
+			}
+		</script>
+
+		<button class="button logout" id="logout-btn" onclick="logout()"><span>Logout</span></button>
+		<button class="button profile" id="profile-btn" onclick="window.location.href='profile.html'"><span>Profile</span></button>
+
+		<script type="text/javascript">
+			var xhttp = new XMLHttpRequest();
+
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(this.responseText);
+
+					if (response.loggedIn) {
+						onLoggedIn();
+						onUserInfo(response.userInfo);
+					} else {
+						onLoggedOut();
+
