@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL='https://merogames.github.io/callback.html'">
     <meta charset="UTF-8">
     <title>Login with Discord</title>
   </head>
@@ -14,7 +13,7 @@
         const clientId = "1078436786302357625";
         const redirectUri = "https://merogames.github.io/";
         const scopes = 'identify';
-        const authorizeUrl = `https://discord.com/api/oauth2/authorize?client_id=${1078436786302357625}&redirect_uri=${encodeURIComponent(https%3A%2F%2Fmerogames.github.io%2F)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
+        const authorizeUrl = `https://discord.com/api/oauth2/authorize?client_id=${1078436786302357625}&redirect_uri=${encodeURIComponent(https%3A%2F%2Fmerogames.github.io%2Fcallback.html)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
         window.location.href = authorizeUrl;
       }
     </script>
