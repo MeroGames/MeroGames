@@ -1,85 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>EPC-Lab</title>
-    <style>
-      /* CSS styling for the body element */
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f1f1f1;
-	background-image: url("https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png");
-			background-repeat: no-repeat;
-			background-size: cover;
-      }
-      
-      /* CSS styling for the header element */
-      header {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-      }
-      
-      /* CSS styling for the h1 element */
-      h1 {
-        margin: 0;
-      }
-      
-      /* CSS styling for the login button */
-      #login-btn {
-        background-color: #7289da;
-        color: #fff;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-      /* CSS styling for the login button when hovered over */
-      #login-btn:hover {
-        background-color: #677bc4;
-      }
-      
-      /* CSS styling for the tasks button */
-      #tasks-btn {
-        background-color: #7289da;
-        color: #fff;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-left: 20px;
-      }
-      
-      /* CSS styling for the tasks button when hovered over */
-      #tasks-btn:hover {
-        background-color: #677bc4;
-      }
-    </style>
+<html lang="en">
 
-	<script type="text/javascript">
-		const YOUR_CLIENT_ID = '1078436786302357625';
-		const authUrl = `https://discord.com/api/oauth2/authorize?client_id=1078436786302357625&redirect_uri=https%3A%2F%2Fmerogames.github.io%2Fcallback.html&response_type=code&scope=identify`;
-		
-		function login() {
-			window.location.href = authUrl;
-		}
-	</script>
+<head>
+  <title>EPC-Lab</title>
+  <style>
+    body {
+      background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: white;
+      font-size: 4rem;
+      margin: 0;
+      text-align: center;
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+    .btn {
+      margin: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 1.5rem;
+      text-shadow: 1px 1px 2px #000000;
+      cursor: pointer;
+    }
+
+    .btn-profile {
+      background-color: #7289DA;
+    }
+
+    .btn-logout {
+      background-color: #F04747;
+    }
+  </style>
 </head>
+
 <body>
-	
-      <div style="text-align: center; margin-top: 50px;">
-        <br><br>
-       <a id="login-btn" onclick="login()">Login with Discord</a>
-       <a href="tasks.html" id="tasks-btn">Tasks</a>
-        <br><br>
-        <p style="font-size: 18px;">Welcome to EPC-Lab, a place to complete quests and level up your skills!</p>
-      </div>
+  <div class="container">
+    <h1>EPC-Lab</h1>
+    <a href="" id="login-btn" class="btn btn-logout" onclick="logout()">Logout</a>
+    <a href="profile.html" id="profile-btn" class="btn btn-profile" style="display: none;"></a>
+    <a href="tasks.html" class="btn">Tasks</a>
+  </div>
+  <script>
+    function login() {
+      window.location.href = 'login';
+    }
+
+    function logout() {
+      localStorage.clear();
+      document.getElementById('login-btn').style.display = 'block';
+      document.getElementById('profile-btn').style.display = 'none';
+    }
+
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      document.getElementById('login-btn').style.display = 'none';
+      document.getElementById('profile-btn').style.display = 'block';
+    }
+  </script>
 </body>
+
 </html>
