@@ -2,89 +2,57 @@
 <html>
 
 <head>
-    <title>EPC-Lab</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-     <style>
+  <meta charset="UTF-8">
+  <title>EPC-Lab</title>
+  <style>
     body {
-      background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
-      background-repeat: no-repeat;
+      background-image: url("https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png");
       background-size: cover;
-      font-family: Montserrat, sans-serif;
-      color: white;
+    }
+
+    #content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
     }
 
-    h1 {
-      font-size: 3em;
-      margin: 0 0 1em;
-      text-align: center;
-      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-    }
-
-    .button {
-      display: inline-block;
-      background-color: rgba(0, 0, 0, 0.5);
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
       border: none;
-      color: white;
-      padding: 0.5em 1em;
-      margin: 1em;
-      text-align: center;
-      text-decoration: none;
-      font-size: 1.5em;
+      font-size: 18px;
       font-weight: bold;
+      color: white;
+      background-color: #7289da;
       cursor: pointer;
-      border-radius: 0.25em;
-      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
     }
 
-    .button:hover {
-      background-color: rgba(0, 0, 0, 0.6);
+    button:hover {
+      background-color: #5a68a5;
     }
 
-    .button:active {
-      transform: translateY(2px);
-      box-shadow: none;
-    }
-
-    #login-btn {
-      display: {{display_login}};
-    }
-
-    #profile-btn,
     #logout-btn {
-      display: {{display_profile}};
+      margin-top: 20px;
     }
 
-    #profile-btn img {
-      width: 2em;
-      margin-right: 0.5em;
-      border-radius: 50%;
+    #profile-btn {
+      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
-    <div id="navbar">
-        <a href="#">Tasks</a>
-        <a href="#" id="profile-btn" style="display:none;">Profile</a>
-        <a href="#" id="logout-btn" style="display:none;">Logout</a>
-        <a href="#" class="icon" onclick="toggleNavbar()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
-
-    <div id="content">
-        <h1>Welcome to EPC-Lab</h1>
-        <button onclick="login()" id="login-btn">Login with Discord</button>
-    </div>
-
-    <script src="index.js"></script>
+  <div id="content">
+    <h1 style="color:white">Welcome to EPC-Lab!</h1>
+    <button id="login-btn" onclick="login()">Login with Discord</button>
+    <button id="tasks-btn" onclick="window.location.href='tasks.html'">Tasks</button>
+    <button id="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+    <button id="profile-btn" onclick="window.location.href='profile.html'" style="display: none;"></button>
+  </div>
+  <script src="index.js"></script>
 </body>
 
 </html>
-
