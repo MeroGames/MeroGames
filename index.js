@@ -1,70 +1,86 @@
 const YOUR_CLIENT_ID = "1078436786302357625";
 const YOUR_REDIRECT_URI = "hhttps://merogames.github.io/;
 const YOUR_CLIENT_SECRET = "u18hqq7JsXuk1Nr3zxAqtBZ3vcOBwX-c";
+const DISCORD_API_BASE_URL = "https://discord.com/api";
 
-// Function to handle login with Discord
+let accessToken = "";
+
 function login() {
-  window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${YOUR_CLIENT_ID}&redirect_uri=${YOUR_REDIRECT_URI}&response_type=code&scope=identify`;
+  window.location.href = `${DISCORD_API_BASE_URL}/oauth2/authorize?client_id=${YOUR_CLIENT_ID}&redirect_uri=${YOUR_REDIRECT_URI}&response_type=code&scope=identify`;
 }
 
-// Function to handle logout
 function logout() {
-  localStorage.removeItem('token');
-  location.reload();
+  accessToken = "";
+  document.getElementById("logout-btn").style.display = "none";
+  document.getElementById("profile-btn").style.display = "none";
+  document.getElementById("login-btn").style.display = "block";
 }
 
-// Function to fetch user data
-async function fetchUserData(token) {
-  const response = await fetch('https://discord.com/api/users/@me', {
-    headers: {
-      'Authorization': `Bearer ${token}`
+function getUserInfo() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `${DISCORD_API_BASE_URL}/users/@me`);
+  xhr.setRequestHeader("Authorization", `Bearer ${accessToken}`);
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      const userInfo = JSON.parse(xhr.responseText);
+      const username = userInfo.username + "#" + userInfo.discriminator;
+      const avatarUrl = `https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.png?size=256`;
+      document.getElementById("profile-btn").innerText = username;
+      document.getElementById("profile-btn").style.display = "block";
+      const img = document.createElement("img");
+      img.src = avatarUrl;
+      document.getElementById("profile-btn").appendChild(img);
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("logout-btn").style.display = "block";
+    } else {
+      console.error(xhr.responseText);
     }
-  });
-  const userData = await response.json();
-  return userData;
-}
-
-// Function to display user data
-async function displayUserData() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    return;
-  }
-  const userData = await fetchUserData(token);
-  const profileButton = document.createElement('button');
-  const logoutButton = document.createElement('button');
-  const profileImg = document.createElement('img');
-  const profileName = document.createElement('span');
-
-  profileButton.classList.add('button');
-  profileButton.innerHTML = "Profile";
-  profileButton.onclick = function() {
-    window.location.href = "profile.html";
   };
-
-  logoutButton.classList.add('button');
-  logoutButton.innerHTML = "Logout";
-  logoutButton.onclick = logout;
-
-  profileImg.src = `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`;
-  profileImg.alt = "Profile Image";
-  profileImg.classList.add('profile-img');
-
-  profileName.innerHTML = userData.username;
-  profileName.classList.add('profile-name');
-
-  const profileContainer = document.getElementById('profile-container');
-  profileContainer.appendChild(profileButton);
-  profileContainer.appendChild(logoutButton);
-  profileContainer.appendChild(profileImg);
-  profileContainer.appendChild(profileName);
+  xhr.send();
 }
 
-// Event listener for the login button
-const loginBtn = document.getElementById('login-btn');
-if (loginBtn) {
-  loginBtn.addEventListener('click', login);
+function login() {
+  window.location.href = "https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID_HERE&redirect_uri=YOUR_REDIRECT_URI_HERE&response_type=code&scope=identify";
 }
 
-// Event listener for displaying user data on page load
-window.addEventListener('load', displayUserData);
+function logout() {
+  localStorage.removeItem("discord_token");
+  localStorage.removeItem("discord_user");
+  window.location.reload();
+}
+
+function updateLoginState() {
+  const discordUser = JSON.parse(localStorage.getItem("discord_user"));
+
+  if (discordUser) {
+    // user is logged in
+    document.getElementById("login-btn").style.display = "none";
+    document.getElementById("profile-btn").style.display = "block";
+    document.getElementById("logout-btn").style.display = "block";
+    document.getElementById("profile-btn").innerHTML = discordUser.username;
+
+  } else {
+    // user is not logged in
+    document.getElementById("login-btn").style.display = "block";
+    document.getElementById("profile-btn").style.display = "none";
+    document.getElementById("logout-btn").style.display = "none";
+  }
+}
+
+function loadProfile() {
+  const discordUser = JSON.parse(localStorage.getItem("discord_user"));
+
+  if (discordUser) {
+    const avatarUrl = `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`;
+    document.getElementById("avatar").src = avatarUrl;
+    document.getElementById("username").innerHTML = discordUser.username;
+  }
+}
+
+window.onload = function () {
+  updateLoginState();
+  loadProfile();
+};
+
+document.getElementById("login-btn").addEventListener("click", login);
+document.getElementById("logout-btn").addEventListener("click", logout);
