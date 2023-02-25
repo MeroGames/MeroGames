@@ -4,6 +4,68 @@
 <head>
     <title>EPC-Lab</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+     <style>
+    body {
+      background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Montserrat, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0 0 1em;
+      text-align: center;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+      display: inline-block;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      padding: 0.5em 1em;
+      margin: 1em;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 0.25em;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .button:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    #login-btn {
+      display: {{display_login}};
+    }
+
+    #profile-btn,
+    #logout-btn {
+      display: {{display_profile}};
+    }
+
+    #profile-btn img {
+      width: 2em;
+      margin-right: 0.5em;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 
 <body>
