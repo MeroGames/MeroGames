@@ -48,12 +48,12 @@
 	</style>
 	<script type="text/javascript">
 		function login() {
-			var CLIENT_ID = "1078436786302357625";
-			var REDIRECT_URI = "https://merogames.github.io/";
-			var SCOPE = "identify email";
-
-			window.location.href = "https://discordapp.com/oauth2/authorize?client_id=" + 1078436786302357625 + "&redirect_uri=" +https%3A%2F%2Fmerogames.github.io%2 + "&response_type=code&scope=" + SCOPE;
-		}
+  if (!localStorage.getItem('discord_token')) {
+    window.location.href = '/login';
+  } else {
+    showProfile();
+  }
+}
 
 		function logout() {
 			localStorage.removeItem("access_token");
