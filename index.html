@@ -2,16 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Welcome to EPC Lab</title>
+    <title>Welcome to EPC</title>
     <style>
-      body {
-        
+       body {
         font-family: Arial, sans-serif;
-        background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
+        background-image: url('path/to/image.jpg');
         background-size: cover;
         background-position: center;
       }
-      
       h1 {
         text-align: center;
         color: #333;
@@ -32,22 +30,63 @@
       button:hover {
         background-color: #3e8e41;
       }
+      /* Add your CSS styles here */
     </style>
   </head>
   <body>
     <h1>Welcome to EPC</h1>
     <button id="signup-btn">Sign up</button>
     <button id="login-btn">Login</button>
+
+    <div id="signup-form" style="display: none;">
+      <h2>Sign up</h2>
+      <form id="signup-form-data">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Sign up">
+      </form>
+    </div>
+
     <script>
       // Add your JavaScript code here
       const signupBtn = document.getElementById('signup-btn');
       const loginBtn = document.getElementById('login-btn');
-      
+      const signupForm = document.getElementById('signup-form');
+      const signupFormData = document.getElementById('signup-form-data');
+
       signupBtn.addEventListener('click', () => {
-        // Implement sign up functionality
-        alert('Sign up clicked!');
+        signupForm.style.display = 'block';
       });
-      
+
+      signupFormData.addEventListener('submit', (event) => {
+        event.preventDefault(); // prevent the form from submitting normally
+        const formData = new FormData(signupFormData);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        // Perform client-side validation on the form data
+        if (name === '' || email === '' || password === '') {
+          alert('Please fill out all required fields.');
+          return;
+        }
+
+        // Send an HTTP request to the server to create a new user account
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'signup.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            alert('Your account has been created successfully!');
+            signupForm.style.display = 'none';
+          } else {
+            alert('There was an error creating your account. Please try again later.');
+          }
+        };
+        xhr.send(`name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+      });
+
       loginBtn.addEventListener('click', () => {
         // Implement login functionality
         alert('Login clicked!');
@@ -55,3 +94,4 @@
     </script>
   </body>
 </html>
+
