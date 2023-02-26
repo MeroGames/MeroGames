@@ -100,7 +100,9 @@
       });
       
       // Add a parallax effect to the background image
-      window.addEventListener('scroll', function() {
-        var yPos = -window.pageYOffset / 2;
-        document.body.style.backgroundPosition = 'center ' +
+       window.addEventListener('scroll', function() {
+    var yPos = -window.pageYOffset / 2;
+    document.body.style.backgroundPosition = 'center ' + yPos + 'px';
+  });
+</script>
 
