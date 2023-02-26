@@ -1,9 +1,9 @@
 <?php
 // Connect to the database
-$db_host = 'localhost';
-$db_name = 'epc_db';
-$db_user = 'username';
-$db_pass = 'password';
+$db_host = 'sql302.epizy.com';
+$db_name = 'epiz_33680584_epc_db';
+$db_user = 'epiz_33680584';
+$db_pass = 'Nly0EbiYds';
 $db_conn = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
 
 // Get the user input from the POST request
