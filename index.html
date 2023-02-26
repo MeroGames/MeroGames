@@ -44,6 +44,42 @@
         text-align: center;
         margin-top: 200px;
       }
+      
+      /* Style the login form */
+      #login-form {
+        background-color: #fff;
+        color: #000;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+      
+      /* Style the login form input fields */
+      #login-form input {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        width: 100%;
+      }
+      
+      /* Style the login form submit button */
+      #login-form button {
+        background-color: #a5c5d9;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -51,13 +87,20 @@
     <button id="login-button">Login</button>
     <h1 id="title">Welcome to EPC-Lab</h1>
     
+    <form id="login-form" method="post" action="login.php">
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    
     <script>
+      // Add a click event listener to the login button
+      document.getElementById('login-button').addEventListener('click', function() {
+        document.getElementById('login-form').style.display = 'block';
+      });
+      
       // Add a parallax effect to the background image
       window.addEventListener('scroll', function() {
         var yPos = -window.pageYOffset / 2;
-        document.body.style.backgroundPosition = 'center ' + yPos + 'px';
-      });
-    </script>
-  </body>
-</html>
+        document.body.style.backgroundPosition = 'center ' +
 
