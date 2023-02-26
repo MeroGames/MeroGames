@@ -1,85 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>EPC-Lab</title>
+  <head>
+    <title>My Site</title>
     <style>
-      /* CSS styling for the body element */
+      /* Set the background image and make it fixed */
       body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f1f1f1;
-	background-image: url("https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png");
-			background-repeat: no-repeat;
-			background-size: cover;
+        background-image: url('background.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
       }
       
-      /* CSS styling for the header element */
-      header {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
+      /* Add a semi-transparent overlay to the background image */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
       }
       
-      /* CSS styling for the h1 element */
-      h1 {
-        margin: 0;
-      }
-      
-      /* CSS styling for the login button */
-      #login-btn {
-        background-color: #7289da;
-        color: #fff;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-      /* CSS styling for the login button when hovered over */
-      #login-btn:hover {
-        background-color: #677bc4;
-      }
-      
-      /* CSS styling for the tasks button */
-      #tasks-btn {
-        background-color: #7289da;
-        color: #fff;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-left: 20px;
-      }
-      
-      /* CSS styling for the tasks button when hovered over */
-      #tasks-btn:hover {
-        background-color: #677bc4;
+      /* Style the login button */
+      #login-button {
+        background-color: #fff;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        margin-top: 100px;
       }
     </style>
-
-	<script type="text/javascript">
-		const YOUR_CLIENT_ID = '1078436786302357625';
-		const authUrl = `https://discord.com/api/oauth2/authorize?client_id=1078436786302357625&redirect_uri=https%3A%2F%2Fmerogames.github.io%2Fcallback.html&response_type=code&scope=identify`;
-		
-		function login() {
-			window.location.href = authUrl;
-		}
-	</script>
-</head>
-<body>
-	
-      <div style="text-align: center; margin-top: 50px;">
-        <br><br>
-       <a id="login-btn" onclick="login()">Login with Discord</a>
-       <a href="tasks.html" id="tasks-btn">Tasks</a>
-        <br><br>
-        <p style="font-size: 18px;">Welcome to EPC-Lab, a place to complete quests and level up your skills!</p>
-      </div>
-</body>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <button id="login-button">Login</button>
+    
+    <script>
+      // Add a parallax effect to the background image
+      window.addEventListener('scroll', function() {
+        var yPos = -window.pageYOffset / 2;
+        document.body.style.backgroundPosition = 'center ' + yPos + 'px';
+      });
+    </script>
+  </body>
 </html>
+
