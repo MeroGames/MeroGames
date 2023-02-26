@@ -7,7 +7,7 @@
       body {
           body {
         font-family: Arial, sans-serif;
-        background-image: url('path/to/image.jpg');
+        background-image: url('https://cdn.discordapp.com/attachments/493512163319742464/1021542935826792579/unknown.png');
         background-size: cover;
         background-position: center;
       }
@@ -36,7 +36,22 @@
   </head>
   <body>
     <h1>Welcome to EPC</h1>
-    <button>Sign up</button>
-    <button>Login</button>
+    <button id="signup-btn">Sign up</button>
+    <button id="login-btn">Login</button>
+    <script>
+      // Add your JavaScript code here
+      const signupBtn = document.getElementById('signup-btn');
+      const loginBtn = document.getElementById('login-btn');
+      
+      signupBtn.addEventListener('click', () => {
+        // Implement sign up functionality
+        alert('Sign up clicked!');
+      });
+      
+      loginBtn.addEventListener('click', () => {
+        // Implement login functionality
+        alert('Login clicked!');
+      });
+    </script>
   </body>
 </html>
