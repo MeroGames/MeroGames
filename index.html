@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to EPC Lab</title>
+    <title>Welcome to EPC-Lab</title>
     <style>
       /* Set the background image and make it fixed */
       body {
@@ -23,18 +23,33 @@
       
       /* Style the login button */
       #login-button {
-        background-color: #fff;
-        color: #000;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 18px;
-        margin-top: 100px;
+        background-color: #a5c5d9;
+        color: #fff;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 25px;
+        font-size: 24px;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      /* Style the title */
+      #title {
+        color: #fff;
+        font-size: 48px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 200px;
       }
     </style>
   </head>
   <body>
     <div id="overlay"></div>
     <button id="login-button">Login</button>
+    <h1 id="title">Welcome to EPC-Lab</h1>
     
     <script>
       // Add a parallax effect to the background image
@@ -45,3 +60,4 @@
     </script>
   </body>
 </html>
+
