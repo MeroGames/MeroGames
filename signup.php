@@ -6,6 +6,19 @@ $db_user = 'epiz_33680584';
 $db_pass = 'Nly0EbiYds';
 $db_conn = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
 
+
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+echo "Connected successfully!";
+?>
+
+
+
 // Get the user input from the POST request
 $name = $_POST['name'];
 $email = $_POST['email'];
